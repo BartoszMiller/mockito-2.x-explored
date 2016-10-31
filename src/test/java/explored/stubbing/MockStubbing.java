@@ -3,6 +3,7 @@ package explored.stubbing;
 import org.hamcrest.core.Is;
 import org.hamcrest.core.IsNull;
 import org.junit.Test;
+import org.mockito.Mockito;
 import org.mockito.internal.stubbing.answers.CallsRealMethods;
 import org.mockito.internal.stubbing.answers.DoesNothing;
 import org.mockito.internal.stubbing.answers.Returns;
@@ -24,6 +25,16 @@ public class MockStubbing {
         assertThat(mockedList.size(), Is.is(0));
         assertThat(mockedList.subList(0, 10).size(), Is.is(0));
         assertThat(mockedList.iterator(), IsNull.nullValue());
+    }
+
+    @Test
+    public void stubbedMethodsOverridingDefaultBehavior() {
+
+        List mockedList = mock(List.class, Mockito.RETURNS_DEFAULTS);
+        assertThat(mockedList.iterator(), IsNull.nullValue());
+
+        mockedList = mock(List.class, Mockito.RETURNS_SMART_NULLS);
+        assertThat(mockedList.iterator(), IsNull.notNullValue());
     }
 
     @Test
