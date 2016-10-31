@@ -1,4 +1,4 @@
-package explored.mock;
+package explored.stubbing;
 
 import org.hamcrest.core.Is;
 import org.hamcrest.core.IsNull;
@@ -50,5 +50,16 @@ public class MockStubbingWithArgumentMatchers {
 
         assertThat(mockedBigDecimal.pow(1), Is.is(BigDecimal.ONE));
         assertThat(mockedBigDecimal.pow(2), IsNull.nullValue());
+    }
+
+    @Test
+    public void customArgumentMatcherWithLambda() {
+
+        BigDecimal mockedBigDecimal = mock(BigDecimal.class);
+
+        when(mockedBigDecimal.pow(ArgumentMatchers.intThat(argument -> argument > 1))).thenReturn(BigDecimal.ONE);
+
+        assertThat(mockedBigDecimal.pow(1), IsNull.nullValue());
+        assertThat(mockedBigDecimal.pow(2), Is.is(BigDecimal.ONE));
     }
 }

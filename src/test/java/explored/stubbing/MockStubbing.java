@@ -1,4 +1,4 @@
-package explored.mock;
+package explored.stubbing;
 
 import org.hamcrest.core.Is;
 import org.hamcrest.core.IsNull;
