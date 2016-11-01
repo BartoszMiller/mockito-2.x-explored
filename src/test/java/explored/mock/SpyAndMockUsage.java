@@ -13,14 +13,23 @@ import java.util.Set;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class SpyAndMockUsage {
+
+    // one-liner
+    @Mock
+    private List oneLineMock = when(mock(List.class).isEmpty()).thenReturn(Boolean.TRUE).getMock();
 
     @Mock
     private List mockedList;
 
     @Spy
     private Set spiedSet = new HashSet<>();
+
+    @Spy
+    private HashSet spiedHashSet;
 
     @Before
     public void setUp() {

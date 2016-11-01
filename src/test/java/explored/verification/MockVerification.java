@@ -37,4 +37,16 @@ public class MockVerification {
         verify(mockedList, Mockito.never()).clear();
         verifyZeroInteractions(mockedList);
     }
+
+    @Test
+    public void ignoringStubbedMethods() {
+
+        List mockedList = mock(List.class);
+
+        when(mockedList.isEmpty()).thenReturn(false);
+        mockedList.isEmpty();
+
+        // use ignoreStubs() when you do not want to verify stubbed methods
+        verifyNoMoreInteractions(ignoreStubs(mockedList));
+    }
 }
